@@ -2,8 +2,8 @@
 # Time: 2021/3/2116:23
 # File name: queen.py
 # Development environment: Anaconda Python
-import numpy as np           # 提供维度数组与矩阵运算
-import copy                  # 从copy模块导入深度拷贝方法
+import numpy as np  # 提供维度数组与矩阵运算
+import copy  # 从copy模块导入深度拷贝方法
 from board import Chessboard
 
 '''
@@ -49,6 +49,7 @@ chessboard.play()
 
 '''
 
+
 # 基于棋盘类，设计搜索策略
 class Game:
     def __init__(self, show=True):
@@ -58,6 +59,7 @@ class Game:
 
         self.chessBoard = Chessboard(show)
         self.solves = []
+        self.solve = []
         self.gameInit()
 
     # 重置游戏
@@ -78,12 +80,26 @@ class Game:
     #                                                                            #
 
     def run(self, row=0):
-        self.solves.append([0, 6, 4, 7, 1, 3, 5, 2])
+        if row == 8:
+            self.solves.append(list(self.solve))
+            #print("---/n", self.solves)
+        for column in range(8):
+            if self.isvalid(column):
+                self.solve.append(column)
+                # print(self.solve)
+                self.run(row+1)
+                self.solve.pop()
 
     #                                                                            #
     ##############################################################################
     #################             完成后请记得提交作业             #################
     ##############################################################################
+
+    def isvalid(self,column):
+        for i in range(len(self.solve)):
+            if (len(self.solve) - i) == abs(column - self.solve[i]) or self.solve[i] == column:
+                return False
+        return True
 
     def showResults(self, result):
         """
@@ -104,10 +120,13 @@ class Game:
         """
 
         self.run()
+        print("---/n", self.solves)
         return self.solves
 
 
 game = Game()
 solutions = game.get_results()
 print('There are {} results.'.format(len(solutions)))
+#print(len(solutions[0]))
+# print(solutions)
 game.showResults(solutions[0])

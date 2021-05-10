@@ -1,7 +1,3 @@
-# Developer：Fazzie
-# Time: 2021/4/1518:36
-# File name: game.py
-# Development environment: Anaconda Python
 # !/usr/bin/Anaconda3/python
 # -*- coding: utf-8 -*-
 

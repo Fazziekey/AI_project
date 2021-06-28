@@ -219,12 +219,12 @@ print("the returned reward: ", action)
 
 """  Qlearning 算法相关参数： """
 
-'''
-epoch = 10  # 训练轮数
-epsilon0 = 0.5  # 初始探索概率
+
+epoch = 20  # 训练轮数
+epsilon0 = 1  # 初始探索概率
 alpha = 0.5  # 公式中的 ⍺
-gamma = 0.9  # 公式中的 γ
-maze_size = 5  # 迷宫size
+gamma = 0.94  # 公式中的 γ
+maze_size = 11  # 迷宫size
 
 """ 使用 QLearning 算法训练过程 """
 
@@ -235,10 +235,10 @@ runner = Runner(r)
 runner.run_training(epoch, training_per_epoch=int(maze_size * maze_size * 1.5))
 
 # 生成训练过程的gif图, 建议下载到本地查看；也可以注释该行代码，加快运行速度。
-runner.generate_gif(filename="results/size5.gif")
+# runner.generate_gif(filename="results/size5.gif")
 
 runner.plot_results() # 输出训练结果，可根据该结果对您的机器人进行分析。
-'''
+
 '''
 test_memory = ReplayDataSet(max_size=1e3) # 初始化并设定最大容量
 actions = ['u', 'r', 'd', 'l']
@@ -246,6 +246,7 @@ test_memory.add((0,1), actions.index("r"), -10, (0,1), 1)  # 添加一条数据�
 print(test_memory.random_sample(1)) # 从中随机抽取一条（因为只有一条数据）
 '''
 
+'''
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"  # 允许重复载入lib文件
 
 maze = Maze(maze_size=5)
@@ -272,12 +273,13 @@ for _ in range(25):
     if r == maze.reward["destination"]:
         print("success")
         break
-
+'''
+'''
 
 class Robot(QRobot):
     valid_action = ['u', 'r', 'd', 'l']
 
-    ''' QLearning parameters'''
+
     epsilon0 = 0.5  # 初始贪心算法探索概率
     gamma = 0.94  # 公式中的 γ
 
@@ -449,3 +451,4 @@ runner.run_training(epoch, training_per_epoch)
 # 生成训练过程的gif图, 建议下载到本地查看；也可以注释该行代码，加快运行速度。
 runner.generate_gif(filename="results/dqn_size10.gif")
 
+'''
